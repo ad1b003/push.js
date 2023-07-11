@@ -19,11 +19,11 @@ async function extract(strVal) {
 }
 
 /*
-    * by injecting HTML using innerHTML, code inside the script tags never get executed
-    * to execute the code, we are -
-      * creating a new script tag with its attributes and inner text (code)
-      * then replacing it with the original one
-      * repeating it for each one of the script tags
+ * by injecting HTML using innerHTML, code inside the script tags never get executed
+ * to execute the code, we are -
+    * creating a new script tag with its attributes and inner text (code)
+    * then replacing it with the original one
+    * repeating it for each one of the script tags
  */
 
 // replacing
@@ -55,10 +55,14 @@ async function makeTheScriptsRun(parent = document.body) {
 // getting all elements which have push attribute
 document.querySelectorAll('[push]').forEach(x => {
   const href = x.getAttribute('push'); // link
-  let target = x.getAttribute('push-target'); // where will the content go
+  let target = x.getAttribute('push-target'); // where the content will go
   let transitionEffect = x.getAttribute('transition'); // transition effect
   // adding click event
-  x.addEventListener('click', function() {
+  x.addEventListener('click', function(event) {
+    // if the element is an anchor tag than prevent its default behaviour
+    if (x.tagName.toLowerCase === 'a') {
+      event.preventDefault();
+    }
     if (href !== '') {
       target = target !== null ? target : 'body'; // setting up default value if nothing has given
       transitionEffect = transitionEffect !== null ? transitionEffect : 'slide-in'; // setting up default value if nothing has given
