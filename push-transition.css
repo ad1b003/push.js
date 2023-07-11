@@ -1,45 +1,45 @@
 .slide-in {
-  transform: translateX(-100%);
-  -webkit-transform: translateX(-100%);
-  animation: slide-in 0.5s forwards;
-  -webkit-animation: slide-in 0.5s ease-out forwards;
+  transform: translateX(100%);
+  -webkit-transform: translateX(100%);
+  animation: slide-in 400ms ease-out forwards;
+  -webkit-animation: slide-in 400ms ease-out forwards;
 }
 
 .slide-out {
   transform: translateX(-100%);
   -webkit-transform: translateX(-100%);
-  animation: slide-out 0.5s forwards;
-  -webkit-animation: slide-out 0.5s forwards;
+  animation: slide-out 400ms ease-out forwards;
+  -webkit-animation: slide-out 400ms ease-out forwards;
 }
 
 @keyframes slide-in {
+  0% {
+    transform: translateX(100%);
+  }
+
   100% {
     transform: translateX(0%);
   }
 }
 
 @-webkit-keyframes slide-in {
+  0% {
+    -webkit-transform: translateX(100%);
+  }
+
   100% {
     -webkit-transform: translateX(0%);
   }
 }
 
 @keyframes slide-out {
-  0% {
-    transform: translateX(0%);
-  }
-
   100% {
-    transform: translateX(-100%);
+    transform: translateX(0%);
   }
 }
 
 @-webkit-keyframes slide-out {
-  0% {
-    -webkit-transform: translateX(0%);
-  }
-
   100% {
-    -webkit-transform: translateX(-100%);
+    -webkit-transform: translateX(0%);
   }
 }
