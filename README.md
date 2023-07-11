@@ -22,5 +22,4 @@ Any patterns that work with `querySelector` will work in `push-target`
 ```html
 <button push="content.html" push-target="body" transition="slide-out">Swap</button>
 ```
-#### ⚠️⚠️⚠️ Won't work with `<a>` tag
 ###### See example folder for more
