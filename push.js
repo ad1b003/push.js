@@ -1,12 +1,14 @@
-async function pushContent(file, target = 'body') {
+async function pushContent(file, target, transitionEffect) {
   const fetchedObject = await fetch(file);
   const text = await fetchedObject.text();
   const content = await extract(text);
   const tElement = document.querySelector(target); // 🎯 element
-  tElement.classList.remove('slide-in'); // remove for transition
+  // remove all previous transitions
+  tElement.classList.remove('slide-in');
+  tElement.classList.remove('slide-out');
   tElement.innerHTML = content; // swapping content
   await makeTheScriptsRun(tElement);;
-  tElement.classList.add('slide-in'); // add new transition
+  tElement.classList.add(transitionEffect); // add new transition
 }
 
 // extract what is in between body tag
@@ -53,11 +55,14 @@ async function makeTheScriptsRun(parent = document.body) {
 // getting all elements which have push attribute
 document.querySelectorAll('[push]').forEach(x => {
   const href = x.getAttribute('push'); // link
-  const target = x.getAttribute('push-target'); // where will the content go
+  let target = x.getAttribute('push-target'); // where will the content go
+  let transitionEffect = x.getAttribute('transition'); // transition effect
   // adding click event
   x.addEventListener('click', function() {
     if (href !== '') {
-      target !== null ? pushContent(href, target) : pushContent(href);
+      target = target !== null ? target : 'body'; // setting up default value if nothing has given
+      transitionEffect = transitionEffect !== null ? transitionEffect : 'slide-in'; // setting up default value if nothing has given
+      pushContent(href, target, transitionEffect);
     }
   });
 });
